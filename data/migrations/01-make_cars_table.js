@@ -1,7 +1,18 @@
+
 exports.up = function (knex) {
-  // SİHRİNİZİ GÖSTERİN
+  return knex.schema.createTable('cars', function (table) {
+    table.increments('id').primary();
+
+    table.string('vin').notNullable().unique();
+    table.string('make').notNullable();
+    table.string('model').notNullable();
+    table.float('mileage').notNullable();
+
+    table.string('title').nullable();
+    table.string('transmission').nullable();
+  });
 };
 
 exports.down = function (knex) {
-  // SİHRİNİZİ GÖSTERİN
+  return knex.schema.dropTableIfExists('cars');
 };
